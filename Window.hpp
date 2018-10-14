@@ -2,11 +2,12 @@
 #define WINDOW_HPP
 
 #include <ncurses.h>
-#include <sys/time.h>
-//#include "InfoDisplay.hpp"
+#include "InfoDisplay.hpp"
 #include "NetDisplay.hpp"
 #include "TimeDisplay.hpp"
-//#include "UserDisplay.hpp"
+#include "UserDisplay.hpp"
+#include "CPUUsageDisplay.hpp"
+#include "PhysMemoryDisplay.hpp"
 
 #define TIME_VAL(t1, t2) (((t2).tv_sec * 1000000 + (t2).tv_usec) - ((t1).tv_sec * 1000000 + (t1).tv_usec))
 
@@ -25,12 +26,12 @@ private:
     void    _createBoxes(void);
     bool    _mod;
     WINDOW  *_win[6];
-    struct timeval _currTime;
-    struct timeval _startTime;
-    //Display* _infoDisplay;
+    Display* _infoDisplay;
     Display* _netDisplay;
     Display* _timeDisplay;
-    // Display* _userDisplay;
+    UserDisplay* _userDisplay;
+    CPUUsageDisplay* _cpuDisplay;
+    PhysMemoryDisplay* _physDisplay;
 
 };
 

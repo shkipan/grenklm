@@ -8,7 +8,7 @@ class Module : public IMonitorModule {
 public:
     Module() {};
     virtual ~Module(void);
-    std::string    getData(void);
+    std::string &  getData(void);
     void           compute(void);
 
 protected:

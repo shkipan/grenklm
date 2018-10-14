@@ -2,7 +2,7 @@
 
 Module::~Module(void) {};
 
-std::string
+std::string &
 Module::getData(void) {return _data;};
 
 void

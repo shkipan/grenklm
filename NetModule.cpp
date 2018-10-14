@@ -6,13 +6,16 @@ NetModule::~NetModule(void) {};
 void
 NetModule::compute() {
     FILE *buffer = popen("top", "r");
-    char fromtop[300];
+    char ftop[300];
     int i = -1;
     while (++i < 10)
     {
-        fgets(fromtop, 300, buffer);
+        fgets(ftop, 300, buffer);
         if (i == 8)
-            _data.assign(fromtop);
+        {
+            _data.assign(ftop);
+            _data = _data.substr(_data.find("ts:") + 3, _data.length() - _data.find("ts:") - 3);
+        }
     }
     _data.assign(_data.substr(0, _data.length() - 1));
 }

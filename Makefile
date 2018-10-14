@@ -8,18 +8,18 @@ SRC = 	main.cpp \
 		Window.cpp \
 		TimeDisplay.cpp \
 		TimeModule.cpp \
-			NetDisplay.cpp \
+		NetDisplay.cpp \
 		NetModule.cpp \
-
-		
+		UserDisplay.cpp \
+		UserModule.cpp \
+		InfoDisplay.cpp \
+		InfoModule.cpp \
+		CPUUsageDisplay.cpp \
+		CPUUsageModule.cpp \
+		PhysMemoryModule.cpp \
+		PhysMemoryDisplay.cpp
 
 OBJ = $(SRC:.cpp=.o)
-
-#INC = -I ./inc/ -I ./SDL/SDL2.framework/Headers\
--I ./SDL/SDL2_image.framework/Headers\
--I ./SDL/SDL2_ttf.framework/Headers
-
-#FRM = -F ./SDL/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework OpenCL
 
 all: $(NAME)
 
@@ -37,12 +37,4 @@ fclean: clean
 
 re: fclean all
 
-
-		
-
-		
-#		UserDisplay.cpp \
-		UserModule.cpp \
-			InfoDisplay.cpp \
-		InfoModule.cpp \
 
