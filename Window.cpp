@@ -1,14 +1,15 @@
 #include "Window.hpp"
 
-Window::Window(void) {    
+Window::Window(void) {
+    _readWin();
     _mod = true;
     _initNcurs();
-    _infoDisplay = new InfoDisplay(_win[1]);
-    _netDisplay = new NetDisplay(_win[4]);
-    _timeDisplay = new TimeDisplay(_win[0]);
-    _userDisplay = new UserDisplay(_win[5]);
-    _cpuDisplay = new CPUUsageDisplay(_win[2]);
-    _physDisplay = new PhysMemoryDisplay(_win[3]);
+    _timeDisplay = new TimeDisplay(_win[_windows[0]]);
+    _infoDisplay = new InfoDisplay(_win[_windows[1]]);
+    _cpuDisplay = new CPUUsageDisplay(_win[_windows[2]]);
+    _physDisplay = new PhysMemoryDisplay(_win[_windows[3]]);
+    _netDisplay = new NetDisplay(_win[_windows[4]]);
+    _userDisplay = new UserDisplay(_win[_windows[5]]);
     _colors[0] = COLOR_BLUE;
     _colors[1] = COLOR_GREEN;
     _colors[2] = COLOR_RED;
@@ -48,6 +49,39 @@ Window::_createBoxes(void) {
 }
 
 void
+Window::_readWin(void) {
+    int i = -1;
+    while (++i < 6)
+        _windows[i] = 7;
+    try{
+        std::ifstream fin("Config");
+        if (!fin.is_open())
+            throw std::logic_error("Can't open file");
+        std::stringstream buff;
+        buff << fin.rdbuf();
+        fin.close();
+        std::string text = buff.str();
+        if (text.length() != 7)
+            throw std::logic_error("Invalid string in file");
+        int i = -1;
+        while (++i < 6) {
+            if (text[i] - '0' > 5 || text[i] - '0' < 0)
+                throw std::logic_error("Invalid string in file");
+            int j = -1;
+            while (++j < i)
+                if (text[i] - '0' == _windows[j])
+                    throw std::logic_error("Invalid string in file");
+            _windows[i] = text[i] - '0';
+        }
+    }
+    catch(std::exception & e) {
+        int i = -1;
+         while (++i < 6)
+            _windows[i] = 5 - i;
+    }
+};
+
+void
 Window::_initNcurs(void) {
 
     initscr();
@@ -67,6 +101,8 @@ Window::_initNcurs(void) {
 void
 Window::spin(void) {
     int c = getch();
+    int x = 0;
+    int y = 0;
     _createBoxes();
     while (c != 27 && c != 'q') {
         _iter();

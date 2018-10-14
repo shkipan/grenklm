@@ -67,6 +67,7 @@ CPUUsageDisplay::display() {
     wattron(_win, COLOR_PAIR(54));
     mvwprintw(_win, 14, 5, "%*s", x, "1");
     wattroff(_win, COLOR_PAIR(54));
+    box(_win, 0, 0);
     }
     catch (std::exception & e){
 

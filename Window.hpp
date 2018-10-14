@@ -2,6 +2,9 @@
 #define WINDOW_HPP
 
 #include <ncurses.h>
+#include <sstream>
+#include <fstream>
+#include <exception>
 #include "InfoDisplay.hpp"
 #include "NetDisplay.hpp"
 #include "TimeDisplay.hpp"
@@ -24,9 +27,11 @@ private:
     void    _iter(void);
     void    _initNcurs(void);
     void    _createBoxes(void);
+    void    _readWin(void);
     bool    _mod;
     WINDOW  *_win[6];
     int      _colors[6];
+    int     _windows[6];
     Display* _infoDisplay;
     Display* _netDisplay;
     Display* _timeDisplay;

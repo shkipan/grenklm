@@ -16,6 +16,7 @@ PhysMemoryDisplay::display() {
     mvwprintw(_win, 9, 5, "                                        ");
     mvwprintw(_win, 4, 2, tmp.substr(0, tmp.length() - 1).c_str());
     wrefresh(_win);
+    box(_win, 0, 0);
     wattroff(_win, COLOR_PAIR(20));
 }
 

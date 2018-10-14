@@ -24,6 +24,7 @@ InfoDisplay::display() {
         mvwprintw(_win, 10, 8, tmp.substr(0, tmp.find("Secu") - 7).c_str());
         tmp = tmp.substr(tmp.find("Tim"), tmp.length());
         mvwprintw(_win, 12, 8, tmp.substr(0, tmp.length() - 1).c_str());
+        box(_win, 0, 0);
     }
     catch(std::exception &e) {
     }

@@ -13,7 +13,7 @@ UserDisplay::display(){
     wattron(_win, COLOR_PAIR(24));
     mvwprintw(_win, 2, (x - 9) / 2, "Kitty Display");
     x = (x - 40) / 2;
-    y = (y - 11) / 2;
+    y = 4;
     mvwprintw(_win, y, x, "                \\`*-.");
     mvwprintw(_win, y + 1, x, "                 )  _`-.");
     mvwprintw(_win, y + 2, x, "                .  : `. .");
@@ -28,6 +28,7 @@ UserDisplay::display(){
         mvwprintw(_win, y + 11, x, "                  ; '   : :`-:     _.`* ;");
         mvwprintw(_win, y + 12, x, "         [bug] .*' /  .*' ; .*`- +'  `*'");
         mvwprintw(_win, y + 13, x, "               `*-*   `*-*  `*-*'");
+    box(_win, 0, 0);
     wattroff(_win, COLOR_PAIR(24));
     wrefresh(_win);
 }

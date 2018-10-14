@@ -13,8 +13,7 @@ TimeDisplay::display() {
     mvwprintw(_win, 2, (x - 16) / 2, "Date/Time Display");
     disp_time(5, 14, _module->getData().substr(0,  _module->getData().find(" ")));
     disp_date(10, 4, _module->getData().substr(_module->getData().find(" ") + 1, _module->getData().size() - _module->getData().find(" ") - 1));
-   // mvwprintw(_win, y / 2 - 3, (x - 8) / 2, _module->getData().substr(0,  _module->getData().find(" ")).c_str());
-    //mvwprintw(_win, y / 2 - 2, (x - 10) / 2, _module->getData().substr(_module->getData().find(" ") + 1, _module->getData().size() - _module->getData().find(" ") - 1).c_str());
+    box(_win, 0, 0);
     wattroff(_win, COLOR_PAIR(23));
     wrefresh(_win);
     _module->getData().clear();
