@@ -26,6 +26,7 @@ private:
     void    _createBoxes(void);
     bool    _mod;
     WINDOW  *_win[6];
+    int      _colors[6];
     Display* _infoDisplay;
     Display* _netDisplay;
     Display* _timeDisplay;

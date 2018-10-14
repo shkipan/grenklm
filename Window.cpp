@@ -9,6 +9,12 @@ Window::Window(void) {
     _userDisplay = new UserDisplay(_win[5]);
     _cpuDisplay = new CPUUsageDisplay(_win[2]);
     _physDisplay = new PhysMemoryDisplay(_win[3]);
+    _colors[0] = COLOR_BLUE;
+    _colors[1] = COLOR_GREEN;
+    _colors[2] = COLOR_RED;
+    _colors[3] = COLOR_YELLOW;
+    _colors[4] = COLOR_CYAN;
+    _colors[5] = COLOR_MAGENTA;
     _iter();
 };
 Window::~Window(void) {
@@ -53,6 +59,8 @@ Window::_initNcurs(void) {
     int c = -1;
     while (++c < 6)
         _win[c] = NULL;
+    start_color();
+    
     _createBoxes();
 }
 
@@ -60,7 +68,7 @@ void
 Window::spin(void) {
     int c = getch();
     _createBoxes();
-    while (c != 27) {
+    while (c != 27 && c != 'q') {
         _iter();
         c = getch();
     }
@@ -69,6 +77,7 @@ Window::spin(void) {
 
 void
 Window::_iter(void) {
+    try{
     _userDisplay->display();
     _timeDisplay->display();
     _infoDisplay->display();
@@ -76,4 +85,10 @@ Window::_iter(void) {
     _cpuDisplay->display();
     _physDisplay->display();
     refresh();
+    }
+    catch (std::exception & e) {
+        endwin();
+        std::cout << e.what() << std::endl;
+        exit(-1);
+    }
 }

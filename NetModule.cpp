@@ -6,6 +6,7 @@ NetModule::~NetModule(void) {};
 void
 NetModule::compute() {
     FILE *buffer = popen("top", "r");
+    if (!buffer) throw std::runtime_error("popen() failed!");
     char ftop[300];
     int i = -1;
     while (++i < 10)

@@ -6,6 +6,7 @@ InfoModule::~InfoModule(void) {};
 void
 InfoModule::compute() {
     FILE *buffer = popen("system_profiler SPSoftwareDataType", "r");
+    if (!buffer) throw std::runtime_error("popen() failed!");
     char syst[100];
     std::string temp;
     int i = -1;
@@ -15,7 +16,6 @@ InfoModule::compute() {
         if (i > 3)
         {
             temp.assign(syst);
-            temp = temp.substr(temp.find(": ") + 2, temp.size() - temp.find(": ") + 2);
             _data.append(temp);
         }
     }
